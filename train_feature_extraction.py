@@ -4,10 +4,15 @@ from sklearn.model_selection import train_test_split
 from alexnet import AlexNet
 
 # TODO: Load traffic signs data.
+with open('train.p', 'rb') as f:
+    data = pickle.load(f)
 
 # TODO: Split data into training and validation sets.
+X_train, X_val, y_train, y_val = train_test_split(data['features'], data['labels'], test_size=0.2)
 
 # TODO: Define placeholders and resize operation.
+x = tf.placeholder(tf.float32, (-1, 227, 227, 3))
+y = tf.placeholder(tf.float32, (-1, 43))
 
 # TODO: pass placeholder as first argument to `AlexNet`.
 fc7 = AlexNet(..., feature_extract=True)
